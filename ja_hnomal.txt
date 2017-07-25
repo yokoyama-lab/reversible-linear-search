@@ -1,0 +1,78 @@
+procedure linear1(int k[], int key, int n, int f, stack g)
+    local int i = 0
+    
+      push(1, g)
+      from top(g) = 1 loop
+         if k[i] = key then
+             push(f, g)
+             f ^= 1
+             push(1, g)
+         else
+             push(0, g)
+         fi top(g) = 1    
+             i += 1
+             push(0, g)
+      until i >= n || f != -1
+    
+      push(i, g)
+    
+    delocal int i = 0
+ 
+procedure linear2(int k[], int key, int n, int f)
+    local stack g = nil
+     local int x = -1
+      call linear1(k, key, n, x, g)
+      f ^= x
+      uncall linear1(k, key, n, x, g)
+     delocal int x = -1
+    delocal stack g = nil
+ 
+procedure main()
+    int k[10] = {4, 2, 3, 5, 10, 7, 8, 6, 1, 9}
+    int key
+    int f
+    int n
+    key ^= 11
+    n ^= 10
+    
+    call linear2(k, key, n, f)
+
+procedure linear1(int k[], int key, int n, int f, stack g)
+    local int i = 0
+    
+      push(1, g)
+      from top(g) = 1 loop
+         if k[i] = key then
+              push(f, g)
+              f ^= 1
+              push(1, g)
+         else
+              push(0, g)
+         fi top(g) = 1    
+         i += 1
+         push(0, g)
+         until i >= n || f != -1
+    
+         push(i, g)
+    
+    delocal int i = 0
+ 
+    
+ 
+procedure main()
+    int k[10] = {4, 2, 3, 5, 10, 7, 8, 6, 1, 9}
+    int key
+    int f
+    int n
+    key ^= 0
+    n ^= 10
+ 
+    local stack g = nil
+      local int x = -1
+       call linear1(k, key, n, x, g)
+       f ^= x
+       uncall linear1(k, key, n, x, g)
+      delocal int x = -1
+    delocal stack g = nil
+
+

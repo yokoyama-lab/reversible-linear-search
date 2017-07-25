@@ -1,5 +1,5 @@
 #include<stdio.h>
-
+/*配列を用いた通常型*/
 int linear(int k[], int key, int n, int f)
 {
     int i;
