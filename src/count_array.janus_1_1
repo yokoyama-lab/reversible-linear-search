@@ -1,0 +1,16 @@
+// 以下のサイトで実行できます：http://tetsuo.jp/janus-playground-v1.1/
+// 配列中の要素の数え上げ
+procedure count_array(int k[], int key, int c)
+  iterate int i = 0 to size(k)-1
+    if k[i] = key then
+      c += 1
+    fi k[i] = key
+  end
+ 
+procedure main()
+  int k[10] = {4, 2, 3, 5, 10, 7, 8, 6, 1, 9}
+  int key = 5
+  int c
+  
+  call count_array(k, key, c)
+  printf("The result is %d", c)
