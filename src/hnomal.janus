@@ -1,78 +1,42 @@
-procedure linear1(int k[], int key, int n, int f, stack g)
-    local int i = 0
-    
-      push(1, g)
-      from top(g) = 1 loop
-         if k[i] = key then
-             push(f, g)
-             f ^= 1
-             push(1, g)
-         else
-             push(0, g)
-         fi top(g) = 1    
-             i += 1
-             push(0, g)
-      until i >= n || f != -1
-    
-      push(i, g)
-    
-    delocal int i = 0
- 
-procedure linear2(int k[], int key, int n, int f)
-    local stack g = nil
-     local int x = -1
-      call linear1(k, key, n, x, g)
-      f ^= x
-      uncall linear1(k, key, n, x, g)
-     delocal int x = -1
-    delocal stack g = nil
- 
-procedure main()
-    int k[10] = {4, 2, 3, 5, 10, 7, 8, 6, 1, 9}
-    int key
-    int f
-    int n
-    key ^= 11
-    n ^= 10
-    
-    call linear2(k, key, n, f)
+// 配列を用いた通常型線形探索
+procedure search_array_landauer(int k[], int n, int key, int f, stack g)
+  local int i = 0
 
-procedure linear1(int k[], int key, int n, int f, stack g)
-    local int i = 0
-    
-      push(1, g)
-      from top(g) = 1 loop
-         if k[i] = key then
-              push(f, g)
-              f ^= 1
-              push(1, g)
-         else
-              push(0, g)
-         fi top(g) = 1    
+    push(1, g)
+    from top(g) = 1 loop
+       if k[i] = key then
+         push(f, g)
+         f ^= 1
+         push(1, g)
+       else
+         push(0, g)
+       fi top(g) = 1    
          i += 1
          push(0, g)
-         until i >= n || f != -1
-    
-         push(i, g)
-    
-    delocal int i = 0
+    until i >= n || f != 0
+  
+    push(i, g)
+  delocal int i = 0
  
-    
+procedure search_array_bennett(int k[], int n, int key, int f)
+  local stack g = nil
+    local int x = 0
+      call search_array_landauer(k, n, key, x, g)
+      f ^= x
+      uncall search_array_landauer(k, n, key, x, g)
+    delocal int x = 0
+  delocal stack g = nil
  
 procedure main()
-    int k[10] = {4, 2, 3, 5, 10, 7, 8, 6, 1, 9}
-    int key
-    int f
-    int n
-    key ^= 0
-    n ^= 10
- 
-    local stack g = nil
-      local int x = -1
-       call linear1(k, key, n, x, g)
-       f ^= x
-       uncall linear1(k, key, n, x, g)
-      delocal int x = -1
-    delocal stack g = nil
+  int k[10] = {4, 2, 3, 5, 10, 7, 8, 6, 1, 9}
+  int key = 11
+  int f
+  int n = 10
+  
+  call search_array_bennett(k, n, key, f)
+  printf("The result is %d (0 => not found, 1 => found)", f)
+  key ^= 11 // zero clear
 
-
+  key ^= 7
+  call search_array_bennett(k, n, key, f)
+  printf("The result is %d (0 => not found, 1 => found)", f)

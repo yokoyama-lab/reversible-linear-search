@@ -4,8 +4,9 @@
 int search_array(int k[], int n, int key)
 {
     int f = 0;
+    int i;
 
-    for (int i = 0; (i < n) && (f == 0); i++) {
+    for (i = 0; (i < n) && (f == 0); i++) {
         if (k[i] == key) {
             f = 1;
         }
@@ -54,6 +55,7 @@ int search_stack_sentinel(struct stack *s, int key)
         pop(&x, s);
     }
 
+    pop(&x, s);
     return empty(s);
 }
 
@@ -73,12 +75,14 @@ int search_sorted_array_sentinel(int k[], int n, int key)
 
 /* スタックを用いた昇順型線形探索 */
 /* スタック s の要素は昇順に整列されていると仮定する */
+/* スタック s の一番下の要素は番兵と仮定する */
 int search_sorted_stack_sentinel(struct stack *s, int n, int key)
 {
     int x;
     while (key > top(s)) {
         pop(&x, s);
     }
+    pop(&x, s);
 
     return !empty(s);
 }

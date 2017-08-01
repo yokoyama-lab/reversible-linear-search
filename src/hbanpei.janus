@@ -1,85 +1,48 @@
-// 配列を用いた番兵法
-procedure banpei1(int k[], int key, int n, int f, stack g)
-    local int i = 0
-    
-      push(k[n], g)
-      k[n] ^= key
-    
+// 配列と番兵を用いた線形探索
+procedure search_array_sentinel_landauer(int k[], int key, int n, int f, stack g)
+  push(k[n], g)
+  k[n] ^= key
+  local int i = 0
+    push(1, g)
+    from top(g) = 1 do
+      i += 1
+      push(0, g)
+    until k[i] = key
+  
+    if i < n then
+      push(f, g)
+      f ^= 1
       push(1, g)
-      from top(g) = 1 loop
-         i += 1
-         push(0, g)
-      until k[i] = key
-    
-      if i < n then
-          push(f, g)
-          f ^= 1
-          push(1, g)
-      else
-          push(f, g)
-          f ^= -1
-          push(0, g)
-      fi top(g) = 1
-    
-      push(i, g)
-    delocal int i = 0
+    else
+      push(0, g)
+    fi top(g) = 1
+  
+    push(i, g)
+  delocal int i = 0
+  k[n] ^= key
 
 procedure banpei2(int k[], int key, int n, int f)
-    local stack g = nil
-      local int x = 0
-        call banpei1(k, key, n, x, g)
-        f ^= x
-        uncall banpei1(k, key, n, x, g)
-      delocal int x = 0
-    delocal stack g = nil
+  local stack g = nil
+    local int ff = 0
+      call search_array_sentinel_landauer(k, key, n, ff, g)
+      f ^= ff
+      uncall search_array_sentinel_landauer(k, key, n, ff, g)
+    delocal int ff = 0
+  delocal stack g = nil
 
 procedure main()
-    int key
-    int n
-    int k[11] = {10, 4, 3, 2, 9, 6, 7, 8, 5, 1}
-    int f
-    key ^= 9
-    n ^= 10
-    
-    call banpei2(k,key,n,f)
+  int key
+  int n
+  int k[11] = {10, 4, 3, 2, 9, 6, 7, 8, 5, 1}
+  int f
+  n ^= 10
 
-procedure banpei(int k[], int key, int n, int f, stack g)
-    local int i = 0
-    
-      push(k[n], g)
-      k[n] ^= key
-    
-      push(1, g)
-      from top(g) = 1 loop
-         i += 1
-         push(0, g)
-      until k[i] = key
-    
-      if i < n then
-          push(f, g)
-          f ^= 1
-          push(1, g)
-      else
-          push(f, g)
-          f ^= -1
-          push(0, g)
-      fi top(g) = 1
-    
-      push(i, g)
-    delocal int i = 0
-    
-procedure main()
-    int key
-    int n
-    int k[11] = {10, 4, 3, 2, 9, 6, 7, 8, 5, 1}
-    int f
-    key ^= 99
-    n ^= 10
-    
-    local stack g = nil
-      local int x = 0
-        call banpei(k, key, n, x, g)
-        f ^= x
-        uncall banpei(k, key, n, x, g)
-      delocal int x = 0
-    delocal stack g = nil
+  key ^= 9
+  call banpei2(k,key,n,f)
+  printf("The result is %d (0 => not found, 1 => found)", f)
+  f ^= 1 // zero clear
+  key ^= 9
+
+  key ^= 99
+  call banpei2(k,key,n,f)
+  printf("The result is %d (0 => not found, 1 => found)", f)

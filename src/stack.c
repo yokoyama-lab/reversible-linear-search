@@ -8,12 +8,12 @@ void init(struct stack *s)
 void push(int *x, struct stack *s)
 {
     s->top += 1;
-    s->box[s->top] = *x;
+    s->data[s->top] = *x;
 }
 
 void pop(int *x, struct stack *s)
 {
-    *x = s->box[s->top];
+    *x = s->data[s->top];
     s->top -= 1;
 }
 
@@ -24,5 +24,5 @@ int empty(struct stack *s)
 
 int top(struct stack *s)
 {
-    return s->box[s->top];
+    return s->data[s->top];
 }

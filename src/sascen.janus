@@ -1,72 +1,54 @@
-スタックを用いた昇順型
-procedure aolinear(stack s, int key, stack t, int f, stack g)
-    local int x = 0
-    
+// スタックと番兵を用いた昇順型線形探索
+// スタック s の要素は昇順に整列されていると仮定する
+// スタック s の一番下の要素は番兵と仮定する
+procedure search_sorted_stack_sentinel_landauer(stack s, int key, int f, stack g)
+  local int x = 0
+  
+    push(1, g)
+    from top(g) = 1 loop
+       push(x, g)
+       pop(x, s)
+       push(0, g)
+    until top(s) >= key
+    push(x, g)
+    pop(x, s)
+    if empty(s) then
       push(1, g)
-      from top(g) = 1 loop
-         pop(x, s)
-         push(x, t)
-         push(0, g)
-      until top(s) >= key
-   
-      if top(s) = key then
-          pop(x, s)
-          push(x, t)
-          if !empty(s) then
-              push(f, g)
-              f ^= 1
-              push(1, g)
-          else
-              push(0, g)
-          fi top(g) = 1
-          push(1, g)
-      else
-          push(0, g)
-      fi top(g) = 1
-   
-      push(x, g)
-    delocal int x = 0
-    
-procedure aolinear1(stack s, int key, int f)
-    local stack g = nil
-     local stack t = nil
-      local int y = -1
-        call aolinear(s, key, t, y, g)
-        f ^= y
-        uncall aolinear(s, key, t, y, g)
-      delocal int y = -1
-     delocal stack t = nil  
-    delocal stack g = nil    
+    else
+      push(f, g)
+      f ^= 1
+      push(0, g)
+    fi top(g) = 1
+ 
+    push(x, g)
+  delocal int x = 0
+
+procedure search_sorted_stack_sentinel_bennett(stack s, int key, int f)
+  local stack g = nil
+    local int ff = 0
+      call search_sorted_stack_sentinel_landauer(s, key, ff, g)
+      f ^= ff
+      uncall search_sorted_stack_sentinel_landauer(s, key, ff, g)
+    delocal int ff = 0
+  delocal stack g = nil    
    
 procedure main()
-    int key
-    int f
-    stack s
-    key ^= 100
-    local int x = 0
-      x += 100
-      push(x, s)
-      x += 19
-      push(x, s)
-      x += 17
-      push(x, s)
-      x += 15
-      push(x, s)
-      x += 13
-      push(x, s)
-      x += 11
-      push(x, s)
-      x += 9
-      push(x, s)
-      x+=7
-      push(x, s)
-      x += 5
-      push(x, s)
-      x += 3
-      push(x, s)
-      x += 1
-      push(x, s)
-    delocal int x = 0
-    
-    call aolinear1(s, key, f)
+  int key
+  int f
+  stack s
 
+  key ^= 100
+  push(100, s)
+  push(19, s)
+  push(17, s)
+  push(15, s)
+  push(13, s)
+  push(11, s)
+  push(9, s)
+  push(7, s)
+  push(5, s)
+  push(3, s)
+  push(1, s)
+  
+  call search_sorted_stack_sentinel_bennett(s, key, f)
+  printf("The result is %d (0 => not found, 1 => found)", f)

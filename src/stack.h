@@ -4,7 +4,7 @@
 #define SMAX 1024
 
 struct stack {
-    int box[SMAX];
+    int data[SMAX];
     int top;
 };
 

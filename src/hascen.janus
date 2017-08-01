@@ -1,4 +1,4 @@
-// 配列を用いた昇順型
+// 配列を用いた昇順型線形探索
 procedure search_sorted_array_landauer(int k[], int n, int key, int f, stack g)
   local int i = 0
     push(1, g)
@@ -36,9 +36,9 @@ procedure main()
   int key = 100
 
   call search_sorted_array_bennett(k, n, key, f)
-  show(f)
+  printf("The result is %d (0 => not found, 1 => found)", f)
   key ^= 100
 
   key ^= 11
   call search_sorted_array_bennett(k, n, key, f)
-  show(f)
+  printf("The result is %d (0 => not found, 1 => found)", f)
