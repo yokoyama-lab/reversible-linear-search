@@ -1,0 +1,44 @@
+// 配列を用いた昇順型
+procedure search_sorted_array_landauer(int k[], int n, int key, int f, stack g)
+  local int i = 0
+    push(1, g)
+    from top(g) = 1 loop
+      i += 1
+      push(0, g)
+    until key <= k[i]
+  
+    if k[i] = key && i != n then
+      push(f, g)
+      f ^= 1
+      push(1, g)
+    else
+      push(0, g)
+    fi top(g) = 1
+  
+    push(i, g)
+  delocal int i = 0
+    
+procedure search_sorted_array_bennett(int k[], int n, int key, int f)
+  k[n] ^= 2147483647  // = 2^31 - 1
+  local stack g = nil
+    local int ff = 0
+      call search_sorted_array_landauer(k, n, key, ff, g)
+      f ^= ff
+      uncall search_sorted_array_landauer(k, n, key, ff, g)
+    delocal int ff = 0
+  delocal stack g = nil  
+  k[n] ^= 2147483647  // = 2^31 - 1
+    
+procedure main()
+  int k[11] = {1, 3, 5, 7, 9, 11, 13, 15, 17, 19}
+  int f
+  int n = 10
+  int key = 100
+
+  call search_sorted_array_bennett(k, n, key, f)
+  show(f)
+  key ^= 100
+
+  key ^= 11
+  call search_sorted_array_bennett(k, n, key, f)
+  show(f)
