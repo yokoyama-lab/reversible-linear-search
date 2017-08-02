@@ -1,0 +1,41 @@
+// Tested on an online interpreter: http://tetsuo.jp/janus-playground-v1.1/
+
+// スタックと番兵を用いた昇順型線形探索
+// スタック s の要素は昇順に整列されていると仮定する
+// スタック s の一番下の要素は番兵と仮定する
+procedure search_sorted_stack_sentinel_landauer(stack s, int key, int f, stack g)
+  local int x = 0
+  
+    push(1, g)
+    from top(g) = 1 loop
+       push(x, g)
+       pop(x, s)
+       push(0, g)
+    until top(s) >= key
+    push(x, g)
+    pop(x, s)
+    if empty(s) then
+      push(1, g)
+    else
+      push(f, g)
+      f ^= 1
+      push(0, g)
+    fi top(g) = 1
+ 
+    push(x, g)
+  delocal int x = 0
+
+procedure search_sorted_stack_sentinel_bennett(stack s, int key, int f)
+  local stack g = nil, int ff = 0
+    call search_sorted_stack_sentinel_landauer(s, key, ff, g)
+    f ^= ff
+    uncall search_sorted_stack_sentinel_landauer(s, key, ff, g)
+  delocal stack g = nil, int ff = 0
+   
+procedure main()
+  int key = 100
+  int f
+  stack s = {1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 100}
+  
+  call search_sorted_stack_sentinel_bennett(s, key, f)
+  printf("The result is %d (0 => not found, 1 => found)", f)

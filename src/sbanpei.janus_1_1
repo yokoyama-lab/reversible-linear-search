@@ -1,0 +1,51 @@
+// Tested on an online interpreter: http://tetsuo.jp/janus-playground-v1.1/
+
+// スタックを用いた番兵法
+// スタック s の一番下の要素が番兵であると仮定する
+procedure search_stack_sentinel_landauer(stack s, int key, stack t, int f, stack g)
+  local int x = 0
+    push(1, g)
+    from top(g) = 1 loop
+       push(x, g)
+       pop(x, s)
+       push(0, g)
+    until top(s) = key
+  
+    push(x, g)
+    pop(x, s)
+    if empty(s) then
+      push(1,g)
+    else
+      f ^= 1
+      push(0,g)
+    fi top(g) = 1
+  
+    push(x, g)
+  delocal int x = 0
+
+procedure search_stack_sentinel_bennett(stack s, int key, int f)
+  local stack g = nil, stack t = nil, int y = 0
+    call search_stack_sentinel_landauer(s, key, t, y, g)
+    f ^= y
+    uncall search_stack_sentinel_landauer(s, key, t, y, g)
+  delocal stack g = nil, stack t = nil, int y = 0
+
+
+procedure main()
+  int key = 99
+  int f
+  stack s = {1,2,3,4,5,6,7,8,9,99}
+  stack t
+
+  call search_stack_sentinel_bennett(s, key, f)
+  printf("The result is %d (0 => not found, 1 => found)", f)
+  key ^= 99
+
+  key ^= 2
+  push(2, t)
+  push(1, t)
+  push(2, t)
+  push(3, t)
+
+  call search_stack_sentinel_bennett(t, key, f)
+  printf("The result is %d (0 => not found, 1 => found)", f)

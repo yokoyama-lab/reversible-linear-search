@@ -13,5 +13,7 @@ void push(int *x, struct stack *s);
 void pop(int *x, struct stack *s);
 int empty(struct stack *s);
 int top(struct stack *s);
+void copy(struct stack *s, struct stack *t);
+void print_stack(struct stack *s);
 
 #endif

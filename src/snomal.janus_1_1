@@ -1,3 +1,5 @@
+// Tested on an online interpreter: http://tetsuo.jp/janus-playground-v1.1/
+
 // スタックを用いた通常型
 procedure search_stack_landauer(stack s, int key, int f, stack g)
   local int x = 0
@@ -19,30 +21,16 @@ procedure search_stack_landauer(stack s, int key, int f, stack g)
   delocal int x = 0
 
 procedure search_stack_bennett(stack s, int key, int f)
-  local stack g = nil
-    local int y = 0
-      call search_stack_landauer(s, key, y, g)
-      f ^= y
-      uncall search_stack_landauer(s, key, y, g)
-    delocal int y = 0
-  delocal stack g = nil
+  local stack g = nil, int ff = 0
+    call search_stack_landauer(s, key, ff, g)
+    f ^= ff
+    uncall search_stack_landauer(s, key, ff, g)
+  delocal stack g = nil, int ff = 0
 
 procedure main()
-  stack s
-  int k
+  stack s = {1,2,3,4,5,6,7,8,9,10}
+  int k = 51
   int f
-  k ^= 51
- 
-  push(1, s)
-  push(2, s)
-  push(3, s)
-  push(4, s)
-  push(5, s)
-  push(6, s)
-  push(7, s)
-  push(8, s)
-  push(9, s)
-  push(10, s)
    
   call search_stack_bennett(s,k,f)
   printf("The result is %d", f)
