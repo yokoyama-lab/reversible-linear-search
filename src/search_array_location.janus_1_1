@@ -1,0 +1,24 @@
+// Tested on an online interpreter: http://tetsuo.jp/janus-playground-v1.1/
+
+// 配列中の位置を返す線形探索（見つからなかったときは -1 を返す）
+procedure count_array(int k[], int key, int i)
+  from i = 0 loop
+    i += 1
+  until i = size(k) || k[i] = key
+  if i = size(k) then
+    i -= size(k) + 1
+  fi i = -1
+ 
+procedure main()
+  int k[10] = {4, 2, 3, 5, 10, 7, 8, 6, 1, 9}
+  int key = 5
+  int i
+  
+  call count_array(k, key, i)
+  printf("The result is %d", i)
+  key ^= 5 // zero clear
+  i ^= 3 // zero clear
+
+  key ^= 11
+  call count_array(k, key, i)
+  printf("The result is %d", i)

@@ -1,6 +1,6 @@
 // Tested on an online interpreter: http://tetsuo.jp/janus-playground-v1.1/
 
-// 配列中の要素の数え上げ
+// 配列 k[] 中の key と同じ値の要素の数え上げ
 procedure count_array(int k[], int key, int c)
   iterate int i = 0 to size(k)-1
     if k[i] = key then
