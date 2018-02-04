@@ -35,8 +35,9 @@ void copy(struct stack *s, struct stack *t)
 }
 
 void print_stack(struct stack *s)
-{
-    for (int i = s->top; i >= 0; i--) {
+{ int i;
+
+    for (i = s->top; i >= 0; i--) {
         printf("%d ", s->data[i]);
     }
     printf("\n");
