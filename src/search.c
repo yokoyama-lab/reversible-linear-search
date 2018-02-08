@@ -87,296 +87,410 @@ int search_sorted_stack_sentinel(struct stack *s, int key)
 
     return !empty(s);
 }
+
 /* 配列を用いた通常型線形探索、有無 */
-int s1(int r[],int n,int k)
+int s1(int r[], int n, int k)
 {
-    int f=0;
+    int f = 0;
     int i;
-    for(i=0;(i<n-1) && r[i]!=k;i++){
+    
+    for (i = 0; (i < n-1) && (r[i] != k); i++) {
     }
-    if(r[i]==k){
-        f=1;
+    if (r[i] == k) {
+        f = 1;
     }
+    
     return f;
 }
+
 /* 配列を用いた通常型線形探索、場所 */
-int s2(int r[],int n,int k)
+int s2(int r[], int n, int k)
 {
     int f = -1;
     int i;
-    for(i=0;(i<n-1) && r[i]!=k;i++){
+    
+    for (i = 0; (i < n-1) && (r[i] != k); i++) {
     }
-    if(r[i]==k){
-        f=i;
+    if (r[i] == k) {
+        f = i;
     }
+    
     return f;
 }
+
 /* 配列を用いた通常型線形探索、レコード */
-int s4(int r[],int n,int k)
+int s4(int r[], int n, int k)
 {
-    int f=-1;
+    int f = -1;
     int i;
-    for(i=0;(i<n-1) && r[i]!=k;i++){
+    
+    for (i = 0; (i < n-1) && (r[i] != k); i++) {
     } 
-    if(r[i]==k){
-        f=r[i];
+    if (r[i] == k) {
+        f = r[i];
     }
+    
     return f;
 }
+
 /* 配列を用いた番兵型線形探索、有無 */
-int t1(int r[],int n,int k)
+int t1(int r[], int n, int k)
 {
-    int f=0;
+    int f = 0;
     int i;
-    r[n]=k;
-    for(i=0;r[i]!=k;i++){
+    
+    r[n] = k;
+    for (i = 0; r[i] != k; i++) {
     }
-    if(r[i]==k && i!=n){
-        f=1;
+    if (r[i] == k && i != n) {
+        f = 1;
     }
+    
     return f;
 }
+
 /* 配列を用いた番兵型線形探索、場所 */
-int t2(int r[],int n,int k)
+int t2(int r[], int n, int k)
 {
     int f = -1;
     int i;
-    r[n]=k;
-    for(i=0;r[i]!=k;i++){
+    
+    r[n] = k;
+    for (i = 0; r[i] != k; i++) {
     }
-    if(r[i]==k && i!=n){
-        f=i;
+    if (r[i] == k && i != n) {
+        f = i;
     }
+
     return f;
 }
+
 /* 配列を用いた番兵型線形探索、レコード */
-int t4(int r[],int n,int k)
-{
-    int f=-1;
-    int i;
-    r[n]=k;
-    for(i=0;r[i]!=k;i++){
-    }
-    if(r[i]==k && i!=n){
-        f=r[i];
-    }
-    return f;
-}
-int u1(int r[],int n,int k)
-{
-    int f=0;
-    int i;
-    for(i=0;(i<n-1) && r[i]<k;i++){
-    }
-    if(r[i]==k){
-        f=1;
-    }
-    return f;
-}
-
-int u2(int r[],int n,int k)
+int t4(int r[], int n, int k)
 {
     int f = -1;
     int i;
-    for(i=0;(i<n-1) && r[i]<k;i++){
+    
+    r[n] = k;
+    for (i = 0; r[i] != k; i++) {
     }
-    if(r[i]==k){
-        f=i;
+    if (r[i] == k && i != n) {
+        f = r[i];
     }
+    
     return f;
 }
-int u4(int r[],int n,int k)
+
+/* 配列を用いたソート済み通常型線形探索、有無 */
+int u1(int r[], int n, int k)
+{
+    int f = 0;
+    int i;
+    
+    for (i = 0; (i < n-1) && (r[i] < k); i++) {
+    }
+    if (r[i] == k) {
+        f = 1;
+    }
+    
+    return f;
+}
+
+/* 配列を用いたソート済み通常型線形探索、場所 */
+int u2(int r[], int n, int k)
 {
     int f = -1;
     int i;
-    for(i=0;(i<n-1) && r[i]<k;i++){
+    
+    for (i = 0; (i < n-1) && (r[i] < k); i++) {
     }
-    if(r[i]==k){
-        f=r[i];
+    if (r[i] == k) {
+        f = i;
     }
+
     return f;
 }
-int v1(int r[],int n,int k)
-{
-    int f=0;
-    int i;
-    r[n]=k;
-    for(i=0;r[i]<k;i++){
-    }
-    if(r[i]==k && i!=n){
-        f=1;
-    }
-    return f;
-}
-int v2(int r[],int n,int k)
+
+/* 配列を用いたソート済み通常型線形探索、レコード */
+int u4(int r[], int n, int k)
 {
     int f = -1;
     int i;
-    r[n]=k;
-    for(i=0;r[i]<k;i++){
+    
+    for (i = 0; (i < n-1) && (r[i] < k); i++) {
     }
-    if(r[i]==k && i!=n){
-        f=i;
+    if (r[i] == k) {
+        f = r[i];
     }
+    
     return f;
 }
-int v4(int r[],int n,int k)
+
+/* 配列を用いたソート済み番兵型線形探索、有無 */
+int v1(int r[], int n, int k)
+{
+    int f = 0;
+    int i;
+    
+    r[n] = k;
+    for (i = 0; r[i] < k; i++) {
+    }
+    if (r[i] == k && i != n) {
+        f = 1;
+    }
+    
+    return f;
+}
+
+/* 配列を用いたソート済み番兵型線形探索、場所 */
+int v2(int r[], int n, int k)
 {
     int f = -1;
     int i;
-    r[n]=k;
-    for(i=0;r[i]<k;i++){
+
+    r[n] = k;
+    for (i = 0; r[i] < k; i++) {
     }
-    if(r[i]==k && i!=n){
-        f=r[i];
+    if (r[i] == k && i != n) {
+        f = i;
     }
+
     return f;
 }
-int w2(int r[],int n,int k,int b[])
+
+/* 配列を用いたソート済み番兵型線形探索、レコード */
+int v4(int r[], int n, int k)
+{
+    int f = -1;
+    int i;
+    
+    r[n] = k;
+    for (i = 0; r[i] < k; i++) {
+    }
+    if (r[i] == k && i != n) {
+        f = r[i];
+    }
+    
+    return f;
+}
+
+/* 配列を用いた重複ありの通常型線形探索、場所 */
+int w2(int r[], int n, int k, int b[])
 {
     int i;
-     for(i=0;i<n;i++){
- if(r[i]==k){
-     b[i]=1;
- }
-    } 
+    
+    for (i = 0; i < n; i++) {
+        if (r[i] == k) {
+            b[i] = 1;
+        }
+    }
+    
     return 0;
 }
-int w3(int r[],int n,int k)
+
+/* 配列を用いた重複ありの通常型線形探索、個数 */
+int w3(int r[], int n, int k)
 {
     int f = 0;
     int i;
-    for(i=0;i<n;i++){
- if(r[i]==k){
-        f++;
+    
+    for (i = 0; i < n; i++) {
+        if (r[i] == k) {
+            f++;
  }
     }
-   
+    
     return f;
 }
-int w4(int r[],int n,int k,int b[])
+
+/* 配列を用いた重複ありの通常型線形探索、レコード */
+int w4(int r[], int n, int k, int b[])
 {
     int i;
-     for(i=0;i<n;i++){
- if(r[i]==k){
-     b[i]=r[i];
- }
+    
+    for (i = 0; i < n; i++) {
+        if (r[i] == k) {
+            b[i] = r[i];
+        }
     } 
-    return 0;
-}
-int x2(int r[],int n,int k,int b[])
-{
-    int i;
-    r[n-1]=k;
-     for(i=0;i<n;i++){
- if(r[i]==k){
-     b[i]=1;
- }
-     }
-        b[i-1]=0;      
+    
     return 0;
 }
 
-int x3(int r[],int n,int k)
+/* 配列を用いた重複ありの番兵型線形探索、場所 */
+int x2(int r[], int n, int k, int b[])
 {
-    int f = 0;
     int i;
-    r[n-1]=k;
-    for(i=0;i<n;i++){
- if(r[i]==k){
-        f++;
- }
+    
+    r[n] = k;
+    for (i = 0; i < n; i++) {
+        if ((r[i] == k) && (i != n)) {
+            b[i] = 1;
+        }
     }
-    f-=1; 
-    return f;
-}
-int x4(int r[],int n,int k,int b[])
-{
-    int i;
-    r[n-1]=k;
-     for(i=0;i<n;i++){
- if(r[i]==k){
-     b[i]=r[i];
- }
-     }
-        b[i-1]=0;      
+    
     return 0;
 }
 
-int y2(int r[],int n,int k,int b[])
-{
-    int i;
-    for(i=0;(i<n)&&r[i]<=k;i++){
- if(r[i]==k){
-     b[i]=1;
- }
-    } 
-    return 0;
-}
-
-
-int y3(int r[],int n,int k)
+/* 配列を用いた重複ありの番兵型線形探索、個数 */
+int x3(int r[], int n, int k)
 {
     int f = 0;
     int i;
-    for(i=0;(i<n) && r[i]<=k;i++){
- if(r[i]==k){
-        f++;
- }
-    } 
+    
+    r[n] = k;
+    for (i = 0; i < n; i++) {
+        if ((r[i] == k) && (i != n)) {
+            f++;
+        }
+    }
+    
     return f;
 }
-int y4(int r[],int n,int k,int b[])
+
+/* 配列を用いた重複ありの番兵型線形探索、レコード */
+int x4(int r[], int n, int k, int b[])
 {
     int i;
-    for(i=0;(i<n)&&r[i]<=k;i++){
- if(r[i]==k){
-     b[i]=r[i];
- }
-    } 
+    
+    r[n] = k;
+    for (i = 0; i < n; i++) {
+        if ((r[i] == k) && (i != n)) {
+            b[i] = r[i];
+        }
+    }
+    
     return 0;
 }
 
-int z2(int r[],int n,int k,int b[])
+/* 配列を用いた重複ありソートありの通常型線形探索、場所 */
+int y2(int r[], int n, int k, int b[])
 {
     int i;
-    r[n-1]=k;
-    for(i=0;(i<n)&&r[i]<=k;i++){
- if(r[i]==k){
-     b[i]=1;
- }
+
+    for (i = 0; (i < n) && (r[i] <= k); i++) {
+        if (r[i] == k) {
+            b[i] = 1;
+        }
     } 
-    if(i>=n-1){
-        b[i-1]=0;      
-   }
+    
     return 0;
 }
-int z3(int r[],int n,int k)
+
+/* 配列を用いた重複ありソートありの通常型線形探索、個数 */
+int y3(int r[], int n, int k)
 {
     int f = 0;
     int i;
-    r[n-1]=k;
-    for(i=0;(i<n)&&r[i]<=k;i++){
- if(r[i]==k){
-        f++;
- }
-     } 
-    if(i>=n-1){
-        f--;        
-   }
+    
+    for (i = 0; (i < n) && (r[i] <= k); i++) {
+        if (r[i] == k) {
+            f++;
+        }
+    } 
+    
     return f;
 }
-int z4(int r[],int n,int k,int b[])
+
+/* 配列を用いた重複ありソートありの通常型線形探索、レコード */
+int y4(int r[], int n, int k, int b[])
 {
     int i;
-    r[n-1]=k;
-    for(i=0;(i<n)&&r[i]<=k;i++){
- if(r[i]==k){
-     b[i]=r[i];
- }
-     } 
-    if(i>=n-1){
-        b[i-1]=0;      
-   }
+    
+    for (i = 0; (i < n) && (r[i] <= k); i++) {
+        if (r[i] == k) {
+            b[i] = r[i];
+        }
+    } 
+    
     return 0;
+}
+
+/* 配列を用いた重複ありソートありの番兵型線形探索、場所 */
+int z2(int r[], int n, int k, int b[])
+{
+    int i;
+    
+    r[n] = k;
+    for (i = 0; (i < n) && (r[i] <= k); i++) {
+        if ((r[i] == k) && (i != n)) {
+            b[i] = 1;
+        }
+    } 
+    
+    return 0;
+}
+
+/* 配列を用いた重複ありソートありの番兵型線形探索、個数 */
+int z3(int r[], int n, int k)
+{
+    int f = 0;
+    int i;
+    
+    r[n] = k;
+    for (i = 0; (i < n) && (r[i] <= k); i++) {
+        if ((r[i] == k) && (i != n)) {
+            f++;
+        }
+    }    
+    
+    return f;
+}
+
+/* 配列を用いた重複ありソートありの番兵型線形探索、レコード */
+int z4(int r[], int n, int k, int b[])
+{
+    int i;
+    
+    r[n] = k;
+    for (i = 0; (i < n) && (r[i] <= k); i++) {
+        if ((r[i] == k) && (i != n)) {
+            b[i] = r[i];
+        }
+    } 
+    
+    return 0;
+}
+
+int srch1(int r[], int n, int k)
+{
+    int f = 0;
+    int i;
+    
+    for (i = 0; (i < n) && (f == 0); i++) {  
+        if (r[i] == k) {
+            f = 1;
+        }
+    }
+    
+    return f;
+}
+
+int srch2(int r[], int n, int k)
+{
+    int f = -1;
+    int i;
+    
+    for (i = 0; (i < n) && (f == -1); i++) {
+        if (r[i] == k) {
+            f = i;
+        }
+    }
+    
+    return f;
+}
+
+int srch3(int head[], int next[], int k)
+{
+    int f = -1;
+    int i = 0;
+    
+    while ((f == -1) && (i != -1)) {
+        if (head[i] == k) {
+            f = i;
+        }
+        i = next[i];
+    }
+    
+    return f;
 }
