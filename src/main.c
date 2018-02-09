@@ -6,7 +6,8 @@
 #define MAX 1024
 
 void print_array(int a[], int n)
-{int i;
+{
+    int i;
     for (i = 0; i < n; i++) {
         printf("%d ", a[i]);
     }
@@ -23,9 +24,10 @@ void print(int p)
     printf("%d\n",p);
 }
 
-void print_a(int a[],int n)
+void print_a(int a[], int n)
 {
     int i;
+
     for(i=0;i<n;i++){
         printf("%d  ",a[i]);
     }
@@ -63,7 +65,7 @@ int main(void)
     print_result(search_stack(stk_tmp,key));
     copy(stk,stk_tmp); add_sentinel(key,stk_tmp);
     print_result(search_stack_sentinel(stk_tmp,key));
-      if (sorted==0) {
+    if (sorted==0) {
         if (some==0) {
             print(s1(k,n,key));
             print(s2(k,n,key));
@@ -71,7 +73,7 @@ int main(void)
             print(t1(k,n,key));
             print(t2(k,n,key));
             print(t4(k,n,key));
-              } else {
+        } else {
             w2(k,n,key,b);
             print_a(b,n);
             print(w3(k,n,key));
@@ -82,8 +84,8 @@ int main(void)
             print(x3(k,n,key));
             x4(k,n,key,b);
             print_a(b,n);
-                  }
-      } else {
+        }
+    } else {
         print_result(search_sorted_array_sentinel(k,n,key));
         copy(stk,stk_tmp);
         print_result(search_sorted_stack_sentinel(stk_tmp,key));
@@ -94,7 +96,7 @@ int main(void)
             print(v1(k,n,key));
             print(v2(k,n,key));
             print(v4(k,n,key));
-               } else {
+        } else {
             y2(k,n,key,b);
             print_a(b,n);
             print(y3(k,n,key));
@@ -105,8 +107,8 @@ int main(void)
             print(z3(k,n,key));
             z4(k,n,key,b);
             print_a(b,n);
-                 }
-              }
+        }
+    }
 
     return 0;
 }
