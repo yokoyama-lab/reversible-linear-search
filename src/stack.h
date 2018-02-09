@@ -15,5 +15,6 @@ int empty(struct stack *s);
 int top(struct stack *s);
 void copy(struct stack *s, struct stack *t);
 void print_stack(struct stack *s);
+void add_sentinel(int v, struct stack *s);
 
 #endif

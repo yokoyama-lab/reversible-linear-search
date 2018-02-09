@@ -48,6 +48,7 @@ void print_stack(struct stack *s)
 void add_sentinel(int v, struct stack *s)
 {
     int i;
+
     s->top++;
     for (i = s->top; i > 0; i--) {
         s->data[i] = s->data[i - 1];
